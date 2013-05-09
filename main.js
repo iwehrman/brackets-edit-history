@@ -43,20 +43,26 @@ define(function (require, exports, module) {
             history = doc.getHistory();
 
         if (history.done.length > 0) {
-            var currentLastChangePos = history.done[history.done.length - 1].anchorBefore;
+            var currentLastChangePos = history.done[history.done.length - 1].anchorBefore,
+                cursor = cm.getCursor(),
+                change = null;
+            
             if (currentLastChangePos !== previousLastChangePos) {
-                console.log("Resetting index");
                 index = 1;
-            } else {
-                console.log("Index: " + index);
+            }
+            previousLastChangePos = currentLastChangePos;
+            
+
+            if (history.done.length >= index && index > 1) {
+                do {
+                    change = history.done[history.done.length - (--index)].anchorBefore;
+                } while (change.line === cursor.line && history.done.length >= index && index > 1);
+                
+                if (change !== null && change.line !== cursor.line) {
+                    cm.setCursor(change);
+                }
             }
             
-            previousLastChangePos = currentLastChangePos;
-            if (history.done.length >= index && index > 0) {
-                var change = history.done[history.done.length - (--index)];
-                cm.setCursor(change.anchorBefore);
-                console.log("Position: " + JSON.stringify(change.anchorBefore));
-            }
         } else {
             previousLastChangePos = null;
         }
@@ -68,21 +74,24 @@ define(function (require, exports, module) {
             doc     = cm.doc,
             history = doc.getHistory();
 
-        console.log("History: " + history.done.length);
         if (history.done.length > 0) {
-            var currentLastChangePos = history.done[history.done.length - 1].anchorBefore;
-            if (currentLastChangePos !== previousLastChangePos) {
-                console.log("Resetting index");
-                index = 1;
-            } else {
-                console.log("Index: " + index);
-            }
+            var currentLastChangePos = history.done[history.done.length - 1].anchorBefore,
+                cursor = cm.getCursor(),
+                change = null;
             
+            if (currentLastChangePos !== previousLastChangePos) {
+                index = 1;
+            }
             previousLastChangePos = currentLastChangePos;
+
             if (history.done.length > index && index >= 0) {
-                var change = history.done[history.done.length - (++index)];
-                cm.setCursor(change.anchorBefore);
-                console.log("Position: " + JSON.stringify(change.anchorBefore));
+                do {
+                    change = history.done[history.done.length - (++index)].anchorBefore;
+                } while (change.line === cursor.line && history.done.length > index && index >= 0);
+                
+                if (change !== null && change.line !== cursor.line) {
+                    cm.setCursor(change);
+                }
             }
         } else {
             previousLastChangePos = null;
