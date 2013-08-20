@@ -1,5 +1,6 @@
 {
     "name": "brackets-edit-history",
+    "title": "Brackets Edit History",
     "description": "Edit history extension for Brackets",
     "version": "0.1.0",
     "author" : "Ian Wehrman <ian@wehrman.org>",
