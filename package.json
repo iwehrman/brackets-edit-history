@@ -2,7 +2,7 @@
     "name": "brackets-edit-history",
     "title": "Brackets Edit History",
     "description": "Edit history extension for Brackets",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author" : "Ian Wehrman <ian@wehrman.org>",
     "homepage": "https://github.com/iwehrman/brackets-edit-history/",
     "bugs": "https://github.com/iwehrman/brackets-edit-history/issues",

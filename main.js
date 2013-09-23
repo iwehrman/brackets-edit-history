@@ -37,8 +37,13 @@ define(function (require, exports, module) {
         previousLastChangePos = null;
 
     function nextEditPosition() {
-        var editor  = EditorManager.getFocusedEditor(),
-            cm      = editor._codeMirror,
+        var editor  = EditorManager.getFocusedEditor();
+        
+        if (!editor) {
+            return;
+        }
+        
+        var cm      = editor._codeMirror,
             doc     = cm.doc,
             history = doc.getHistory();
 
@@ -69,8 +74,13 @@ define(function (require, exports, module) {
     }
     
     function previousEditPosition() {
-        var editor  = EditorManager.getFocusedEditor(),
-            cm      = editor._codeMirror,
+        var editor  = EditorManager.getFocusedEditor();
+        
+        if (!editor) {
+            return;
+        }
+        
+        var cm      = editor._codeMirror,
             doc     = cm.doc,
             history = doc.getHistory();
 
