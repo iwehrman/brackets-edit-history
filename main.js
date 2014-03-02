@@ -121,10 +121,8 @@ define(function (require, exports, module) {
         
         var menu = Menus.getMenu(Menus.AppMenuBar.NAVIGATE_MENU);
         menu.addMenuItem(Menus.DIVIDER);
-        menu.addMenuItem(NAVIGATE_EDIT_BACKWARD, [{key: "Ctrl-{", platform: "win"},
-                                                  {key: "Cmd-{", platform: "mac"}]);
-        menu.addMenuItem(NAVIGATE_EDIT_FORWARD, [{key: "Ctrl-}", platform: "win"},
-                                                  {key: "Cmd-}", platform: "mac"}]);
+        menu.addMenuItem(NAVIGATE_EDIT_BACKWARD, "Alt--");
+        menu.addMenuItem(NAVIGATE_EDIT_FORWARD, "Alt-+");
     });
     
 });
